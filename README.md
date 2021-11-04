@@ -1,6 +1,30 @@
 # Customizable display board
 This will be a multi-user webapp that gives users the ability to create custom dashboards. i am writing it in laravel PHP, using an inertia/VueJS front end. This will allow for standardization and easy addition of new board components.
 
+I'm making this as a re-write of my previous display board app, which was a mess of code and ui that was so fragile I couldn't keep throwing little band-aids on it.
+I'd like for this to extremely customizable, both from the webapp itself, but also in regards to adding new board tiles.
+
+## Current work to be done
+- Setup users, remove teams
+- Create user home page
+    - List Boards
+    - New board button
+
+- add simple tile type - words
+  - 1x1, 1x2, 2x1
+  - allow for color customization, text and background
+- More to user dashboard
+    - Explore Tile types
+    - Create favorite tiles, pre customized tiles, easy to use
+- Create display board item that users can create
+    - add horizontal and vertical options
+    - add rows and columns option
+- display board editor
+    - I want this to be drag n drop, but i may end up doing simpler point and click.
+    - menu bar on the side with tile types, show fav tiles
+        - submenu for tile customization
+
+    
 
 ## Development
 
