@@ -1,0 +1,19 @@
+name: Formatting
+on: [push]
+jobs:
+  php-codesniffer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Composer Dependencies
+        run: composer install --no-progress --prefer-dist --no-scripts
+      - name: Run PHP CodeSniffer
+        run: ./vendor/bin/phpcs --warning-severity=0
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install NPM Dependencies
+        run: npm install
+      - name: Run ESLint
+        run: npx eslint --ext=.js,.vue --quiet resources/js/

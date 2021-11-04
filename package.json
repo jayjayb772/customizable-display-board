@@ -7,7 +7,9 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "lint": "eslint --ext=.js,.vue resources/js/",
+        "format": "prettier --write resources/js/"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.10.0",
@@ -17,12 +19,56 @@
         "@tailwindcss/typography": "^0.3.0",
         "@vue/compiler-sfc": "^3.0.5",
         "axios": "^0.21",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-jest": "^24.4.0",
+        "eslint-plugin-vue": "^8.0.3",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "postcss-import": "^12.0.1",
+        "prettier": "^2.3.2",
         "tailwindcss": "^2.0.1",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
+    },
+    "eslintConfig": {
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "eslint:recommended",
+            "plugin:vue/vue3-recommended",
+            "prettier"
+        ],
+        "globals": {
+            "axios": "readonly",
+            "route": "readonly"
+        },
+        "rules": {
+            "vue/multi-word-component-names": ["error", {
+                "ignores": [
+                    "Welcome",
+                    "Show",
+                    "Create",
+                    "Dashboard",
+                    "Register",
+                    "Login",
+                    "Index",
+                    "Modal",
+                    "Label",
+                    "Input",
+                    "Dropdown",
+                    "Checkbox",
+                    "Button",
+                    "Banner"
+                ]
+            }]
+        }
+
+    },
+    "prettier": {
+        "semi": false,
+        "tabWidth": 2
     }
 }

@@ -1,64 +1,179 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Customizable display board
+This will be a multi-user webapp that gives users the ability to create custom dashboards. i am writing it in laravel PHP, using an inertia/VueJS front end. This will allow for standardization and easy addition of new board components.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+I'm making this as a re-write of my previous display board app, which was a mess of code and ui that was so fragile I couldn't keep throwing little band-aids on it.
+I'd like for this to extremely customizable, both from the webapp itself, but also in regards to adding new board tiles.
 
-## About Laravel
+## Current work to be done
+- Setup users, remove teams
+- Create user home page
+    - List Boards
+    - New board button
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- add simple tile type - words
+  - 1x1, 1x2, 2x1
+  - allow for color customization, text and background
+- More to user dashboard
+    - Explore Tile types
+    - Create favorite tiles, pre customized tiles, easy to use
+- Create display board item that users can create
+    - add horizontal and vertical options
+    - add rows and columns option
+- display board editor
+    - I want this to be drag n drop, but i may end up doing simpler point and click.
+    - menu bar on the side with tile types, show fav tiles
+        - submenu for tile customization
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Development
 
-## Learning Laravel
+### Prerequisites
+* [Docker](https://www.docker.com/)
+* [Docker Compose](https://docs.docker.com/compose/)
+* [PHP 8](https://www.php.net/releases/8.0/en.php)
+* [Composer](https://getcomposer.org/)
+* [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10) [*](#wsl)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<a id="wsl">_*_</a>  Windows users must use Windows Subsystem for Linux. Use the command ```wsl``` to open the WSL command line
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Install
+Pull down the source and install the dependencies:
+```bash
+composer install
+```
 
-## Laravel Sponsors
+### Configure
+We configure our application via environment variables in the `.env` file. If it does not already exist, copy the example environment variables file and
+generate a new `APP_KEY`:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-### Premium Partners
+### Start
+We use [Sail](https://laravel.com/docs/8.x/sail) to manage our development
+environment.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+In order to spin up and orchestrate all the necessary containers and serve the
+application:
+```bash
+./vendor/bin/sail up
+```
 
-## Contributing
+The assets are served locally, instead of from a container:
+```bash
+npm run hot
+```
+_*_ You may need to install laravel-mix using ```npm install laravel-mix@latest``` and install nvm to provide a newer
+version of nodejs if the version your distro comes with is old. You'll get an error ehwne running ```npm run hot``` if so.
+[These nvm install instructions](https://tecadmin.net/how-to-install-nvm-on-ubuntu-20-04/) are for Ubuntu 20.04.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Drop any existing tables, run all migrations, and seed the database with fake
+data:
+```bash
+./vendor/bin/sail artisan migrate:fresh --seeder DevelopmentSeeder
+```
 
-## Code of Conduct
+## Formatting
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### PHP
+We use PHP CodeSniffer to enforce PHP coding standards. It is recommended that
+you integrate the `phpcs` linter and the `phpcbf` formatter with your IDE, tho
+you can check your code's formatting manually at any time with:
+```bash
+./vendor/bin/phpcs
+```
+The formatter can be run with:
+```bash
+./vendor/bin/phpcbf
+```
 
-## Security Vulnerabilities
+### Javascript
+We use ESLint and Prettier to enforce our Javascript coding standard. It is
+recommended that you integrate the `eslint` linter and the `prettier` formatter
+with your IDE.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### ESLint
+The configuration for ESLint can be found in `package.json["eslintConfig"]`
+[*](#jsconfigs).
+You can manually check your code's formatting with:
+```bash
+npm run lint
+```
+
+#### Prettier
+The configuration for Prettier can be found in `package.json["prettier"]`
+[*](#jsconfigs).
+Automatically formatting your code with Prettier can be accomplished with:
+```bash
+npm run format
+```
+
+## Testing
+We utilized three different test runners in order to test our application from
+multiple angles.
+
+### Jest
+Jest is a Javascript test runner that we use to test our Vue components. It will
+run any test matching `/tests/**/*.test.js`. See the whole config in
+`package.json["jest"]`[*](#jsconfigs).  Our component test suite is
+located in `tests/Component/`.
+In order to continuously test components while you develop them, run:
+```bash
+npm run test:watch
+```
+
+### PHPUnit
+PHPUnit is a test runner that we use to test the bulk of our test suites,
+`tests/Feature/`, `tests/Integration/`, and `tests/Unit/`. It will run any test
+ending in `Test.php` in those three suites. See the configuration PHPUnit uses
+in `phpunit.xml.dist`. PHPUnit is integrated with Sail and can be run via:
+```bash
+./vendor/bin/sail test
+```
+
+### Laravel Dusk
+Dusk is a test runner built on top of PHPUnit that runs the application
+on a headless browser against any test ending in `Test.php` in the suite
+`tests/Browser/`. The configuration is autogenerated for you by Sail
+when you run:
+```bash
+./vendor/bin/sail dusk
+```
+
+
+## Libraries
+
+### Frameworks
+* [Inertia](https://inertiajs.com/)
+* [Laravel](https://laravel.com/)
+* [Vue](https://vuejs.org/)
+
+### Tooling
+* [ESLint](https://eslint.org/)
+* [Jest](https://jestjs.io/)
+* [Laravel Dusk](https://laravel.com/docs/8.x/dusk)
+* [Laravel Sail](https://laravel.com/docs/8.x/sail)
+* [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+* [PHPUnit](https://phpunit.readthedocs.io/en/stable/)
+* [Prettier](https://prettier.io/)
+
+### Authentication and Team Management
+* [Fortify](https://laravel.com/docs/8.x/fortify)
+* [Jetstream](https://jetstream.laravel.com/)
+* [Passport](https://laravel.com/docs/8.x/passport) [*](#oauth)
+* [Sanctum](https://github.com/laravel/sanctum)
+
+<a id="oauth">*</a> Used only to provide OAuth server functionality.
+Sanctum still supplies all SPA and personal user token functionality.
+Passport cannot easily replace Sanctum given Jetstream makes heavy use
+of Sanctum natively.
+
+## Project Structure
+
+
 
 ## License
 
