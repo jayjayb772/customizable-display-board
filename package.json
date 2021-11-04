@@ -31,5 +31,23 @@
         "tailwindcss": "^2.0.1",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
+    },
+    "eslintConfig": {
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "eslint:recommended",
+            "plugin:vue/vue3-recommended",
+            "prettier"
+        ],
+        "globals": {
+            "axios": "readonly",
+            "route": "readonly"
+        }
+    },
+    "prettier": {
+        "semi": false,
+        "tabWidth": 2
     }
 }
