@@ -44,7 +44,28 @@
         "globals": {
             "axios": "readonly",
             "route": "readonly"
+        },
+        "rules": {
+            "vue/multi-word-component-names": ["error", {
+                "ignores": [
+                    "Welcome",
+                    "Show",
+                    "Create",
+                    "Dashboard",
+                    "Register",
+                    "Login",
+                    "Index",
+                    "Modal",
+                    "Label",
+                    "Input",
+                    "Dropdown",
+                    "Checkbox",
+                    "Button",
+                    "Banner"
+                ]
+            }]
         }
+
     },
     "prettier": {
         "semi": false,

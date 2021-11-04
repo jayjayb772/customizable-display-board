@@ -74,7 +74,7 @@ export default defineComponent({
   watch: {
     show: {
       immediate: true,
-      handler: (show) => {
+      handler(show) {
         if (show) {
           document.body.style.overflow = "hidden"
         } else {
