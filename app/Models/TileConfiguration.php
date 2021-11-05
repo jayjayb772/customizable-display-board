@@ -16,15 +16,18 @@ class TileConfiguration extends Model
         'background_color'
     ];
 
-    public function tile(){
+    public function tile()
+    {
         return $this->belongsTo(Tile::class);
     }
 
-    public function boardTiles(){
+    public function boardTiles()
+    {
         return $this->belongsTo(BoardTiles::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

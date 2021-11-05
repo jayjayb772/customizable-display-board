@@ -59,11 +59,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function boards(){
+    public function boards()
+    {
         return $this->hasMany(Board::class);
     }
 
-    public function tileConfigurations(){
+    public function tileConfigurations()
+    {
         return $this->hasMany(TileConfiguration::class);
     }
 }

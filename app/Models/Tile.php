@@ -13,8 +13,8 @@ class Tile extends Model
         'name',
     ];
 
-    public function tileConfigurations(){
+    public function tileConfigurations()
+    {
         return $this->hasMany(TileConfiguration::class);
     }
-
 }

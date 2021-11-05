@@ -13,11 +13,13 @@ class BoardTiles extends Model
         'board_location'
     ];
 
-    public function board(){
+    public function board()
+    {
         return $this->belongsTo(Board::class);
     }
 
-    public function tileConfiguration(){
+    public function tileConfiguration()
+    {
         return $this->hasOne(TileConfiguration::class);
     }
 }
