@@ -11,7 +11,8 @@ class Board extends Model
 
     protected $fillable = [
         'rotation',
-        'dimensions'
+        'dimensions',
+        'name'
     ];
 
     public function user()

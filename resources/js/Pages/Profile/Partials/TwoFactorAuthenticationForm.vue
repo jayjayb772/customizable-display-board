@@ -166,9 +166,9 @@ export default defineComponent({
     regenerateRecoveryCodes() {
       axios.post("/user/two-factor-recovery-codes").then((response) => {
         this.showRecoveryCodes()
-          if(response.status == 500){
-              this.showQrCode();
-          }
+        if (response.status == 500) {
+          this.showQrCode()
+        }
       })
     },
 

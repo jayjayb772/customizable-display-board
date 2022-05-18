@@ -16,6 +16,7 @@ class CreateBoardsTable extends Migration
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
             $table->string('rotation')->default('horizontal');
             $table->json('dimensions');
             $table->foreignId('user_id');
