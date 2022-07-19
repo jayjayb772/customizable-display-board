@@ -31,10 +31,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
               <div class="ml-3 relative">
                 <!-- Teams Dropdown -->
-                <jet-dropdown
-                  align="right"
-                  width="60"
-                >
+                <jet-dropdown align="right" width="60">
                   <template #trigger>
                     <span class="inline-flex rounded-md">
                       <button
@@ -84,20 +81,13 @@
                         </div>
 
                         <!-- Team Settings -->
-                        <jet-dropdown-link
-                          :href="
-                            route('boards.index')
-                          "
-                        >
-                            My boards
+                        <jet-dropdown-link :href="route('boards.index')">
+                          My boards
                         </jet-dropdown-link>
 
-                        <jet-dropdown-link
-                          :href="route('boards.create')"
-                        >
+                        <jet-dropdown-link :href="route('boards.create')">
                           Create New Board
                         </jet-dropdown-link>
-
                       </template>
                     </div>
                   </template>

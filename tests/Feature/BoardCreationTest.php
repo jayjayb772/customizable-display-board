@@ -12,7 +12,7 @@ class BoardCreationTest extends TestCase
 
     public function test_users_can_create_board()
     {
-     $this->markTestIncomplete();
+        $this->markTestIncomplete();
     }
 
     public function test_team_owners_cant_leave_their_own_team()

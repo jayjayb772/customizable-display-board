@@ -2,13 +2,13 @@
   <app-layout title="Board">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ board.name }}
+        {{ board.name }}
       </h2>
     </template>
 
     <div>
       <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-          {{board}}
+        {{ board }}
       </div>
     </div>
   </app-layout>
@@ -24,14 +24,14 @@ import UpdateTeamNameForm from "@/Pages/Teams/Partials/UpdateTeamNameForm.vue"
 
 export default defineComponent({
   props: {
-      board:{
-          type: Object,
-          required: true
-      },
-      boardTiles:{
-          type: Object,
-          required: true
-      }
+    board: {
+      type: Object,
+      required: true,
+    },
+    boardTiles: {
+      type: Object,
+      required: true,
+    },
   },
   components: {
     AppLayout,
