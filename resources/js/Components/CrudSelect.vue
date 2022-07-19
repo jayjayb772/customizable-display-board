@@ -19,7 +19,7 @@
     class="form-control"
     @input="$emit('update:modelValue', $event.target.value)"
   >
-    <option v-for="option in optionsObject" :key="option.id" :value="option.id">
+    <option v-for="option in optionsObject" :key="option.value" :value="option.value">
       {{ option.name }}
     </option>
   </select>

@@ -27,6 +27,10 @@ export default defineComponent({
       board:{
           type: Object,
           required: true
+      },
+      boardTiles:{
+          type: Object,
+          required: true
       }
   },
   components: {

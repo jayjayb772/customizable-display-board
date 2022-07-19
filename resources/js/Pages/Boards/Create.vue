@@ -6,10 +6,9 @@
       </h2>
     </template>
 
-    <div>
-      <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-<!--        TODO Create create board form-->
-      </div>
+    <div class="w-100 h-100">
+        <CreateBoardForm :board="board">
+        </CreateBoardForm>
     </div>
   </app-layout>
 </template>
@@ -18,10 +17,22 @@
 import { defineComponent } from "vue"
 import AppLayout from "@/Layouts/AppLayout.vue"
 import CreateTeamForm from "@/Pages/Teams/Partials/CreateTeamForm.vue"
+import CreateBoardForm from "./CreateBoardForm";
 
 export default defineComponent({
   components: {
+      CreateBoardForm,
     AppLayout,
   },
+    props:{
+      board:{
+          type: Object,
+          required: true
+      },
+        boardTiles:{
+          type: Object,
+            required: true
+        }
+    }
 })
 </script>

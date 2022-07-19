@@ -30,8 +30,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum'])->group(function() {
-    Route::get(
-        '/boards',
-        [BoardController::class, 'show']
-    )->name('boards.show');
+    Route::resource('boards', BoardController::class)
+        ->only([ 'show', 'create', 'store', 'destroy', 'update', 'index']);
 });

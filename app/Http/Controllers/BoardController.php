@@ -8,6 +8,7 @@ use App\Models\AssetSubcategory;
 use App\Models\Board;
 use App\Models\HardwareAsset;
 use App\Models\SoftwareAsset;
+use App\Models\Tile;
 use App\Models\Utilization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -34,14 +35,18 @@ class BoardController extends Controller
 
     public function create(Request $request)
     {
-
-        return Inertia::render('Boards/Create');
+        $user = $request->user();
+        $tiles = $user->tileConfigurations;
+        return Inertia::render('Boards/Create', [
+            'tiles' => Tile::all()
+        ]);
     }
 
     public function show(Request $request, Board $board): InertiaResponse
     {
         return Inertia::render('Boards/Show', [
             'board' => $board,
+            'boardTiles' => $board->boardTiles
            ]);
     }
 

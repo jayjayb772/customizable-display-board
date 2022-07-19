@@ -34,7 +34,6 @@
                 <jet-dropdown
                   align="right"
                   width="60"
-                  v-if="$page.props.jetstream.hasTeamFeatures"
                 >
                   <template #trigger>
                     <span class="inline-flex rounded-md">
@@ -58,7 +57,7 @@
                           transition
                         "
                       >
-                        {{ $page.props.user.current_team.name }}
+                        Boards
 
                         <svg
                           class="ml-2 -mr-0.5 h-4 w-4"
@@ -81,62 +80,24 @@
                       <!-- Team Management -->
                       <template v-if="$page.props.jetstream.hasTeamFeatures">
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                          Manage Team
+                          Manage Boards
                         </div>
 
                         <!-- Team Settings -->
                         <jet-dropdown-link
                           :href="
-                            route('teams.show', $page.props.user.current_team)
+                            route('boards.index')
                           "
                         >
-                          Team Settings
+                            My boards
                         </jet-dropdown-link>
 
                         <jet-dropdown-link
-                          :href="route('teams.create')"
-                          v-if="$page.props.jetstream.canCreateTeams"
+                          :href="route('boards.create')"
                         >
-                          Create New Team
+                          Create New Board
                         </jet-dropdown-link>
 
-                        <div class="border-t border-gray-100"></div>
-
-                        <!-- Team Switcher -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">
-                          Switch Teams
-                        </div>
-
-                        <template
-                          v-for="team in $page.props.user.all_teams"
-                          :key="team.id"
-                        >
-                          <form @submit.prevent="switchToTeam(team)">
-                            <jet-dropdown-link as="button">
-                              <div class="flex items-center">
-                                <svg
-                                  v-if="
-                                    team.id == $page.props.user.current_team_id
-                                  "
-                                  class="mr-2 h-5 w-5 text-green-400"
-                                  fill="none"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                  ></path>
-                                </svg>
-                                <div>
-                                  {{ team.name }}
-                                </div>
-                              </div>
-                            </jet-dropdown-link>
-                          </form>
-                        </template>
                       </template>
                     </div>
                   </template>
